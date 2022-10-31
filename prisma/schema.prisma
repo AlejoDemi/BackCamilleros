@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model RequestTransfer{
+    id   String @id @default(uuid())
+    areaFrom  String
+    areaTo  String
+    patient  Patient   @relation(fields: [patientId], references: [id])
+    patientId  String
+    status  Status
+    driver  Driver  @relation(fields: [driverId], references: [id])
+    driverId  String
+    leverOfUrgency  Urgency
+    response Response?
+}
+
+model Response{
+    id   String @id @default(uuid())
+    diver Driver    @relation(fields: [driverId], references: [id])
+    driverId  String
+    request RequestTransfer  @relation(fields: [requestId], references: [id])
+    requestId  String @unique
+}
+
+model Driver{
+     id   String @id @default(uuid())
+     name  String
+     requests RequestTransfer[] 
+     responses Response[] 
+}
+
+model Patient{
+    id   String @id @default(uuid())
+    name String
+    room String
+    requests RequestTransfer[]
+}
+
+
+enum Status {
+  PENDING
+  ACCEPTED
+  IN_COURSE
+  CLOSED
+}
+
+enum Urgency {
+   HIGH
+   MEDIUM
+   LOW
+}
