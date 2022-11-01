@@ -17,8 +17,6 @@ model RequestTransfer{
     patient  Patient   @relation(fields: [patientId], references: [id])
     patientId  String
     status  Status
-    driver  Driver  @relation(fields: [driverId], references: [id])
-    driverId  String
     leverOfUrgency  Urgency
     response Response?
 }
@@ -34,7 +32,6 @@ model Response{
 model Driver{
      id   String @id @default(uuid())
      name  String
-     requests RequestTransfer[] 
      responses Response[] 
 }
 
