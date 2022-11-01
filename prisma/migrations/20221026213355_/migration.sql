@@ -1,4 +1,4 @@
--- CreateEnum
+                                    -- CreateEnum
 CREATE TYPE "Status" AS ENUM ('PENDING', 'ACCEPTED', 'IN_COURSE', 'CLOSED');
 
 -- CreateEnum
