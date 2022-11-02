@@ -17,7 +17,7 @@ model RequestTransfer{
     patient  Patient   @relation(fields: [patientId], references: [id])
     patientId  String
     status  Status
-    leverOfUrgency  Urgency
+    levelOfUrgency  Urgency
     response Response?
 }
 

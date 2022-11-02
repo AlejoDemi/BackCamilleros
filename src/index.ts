@@ -9,6 +9,7 @@ app.use(cors())
 app.use(express.json())
 
 
+
 //LISTA DE TODOS LOS PACIENTES
 app.get('/patients', async (req, res) => {
     const patients = await prisma.patient.findMany()
